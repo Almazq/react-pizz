@@ -29,13 +29,13 @@ const initalState = {
     {id: 4, title: "Острые"},
     {id: 5, title: "Закрытые"},
   ],
+  Basket: [
+    {id: 0, pizzaId: 5, pizzaIsTraditional: false, pizzaSize: 26},
+  ]
 };
 
 const ProductsReducer = (state = initalState , action) => {
   switch (action.type) {
-    case "ADD-BASKET":
-      return [...state.Pizza, {id: 2, name:"basket"}]
-      break;
     case "DIVIDE_CATEGORIES":
       return {...state,
         categoryes: action.category == 0
@@ -74,7 +74,11 @@ const ProductsReducer = (state = initalState , action) => {
             default: return {...state, categoryes: state.categoryes};
           }
       break;
-
+      case "ADD-BASKET":
+        return {...state,
+          Basket: [...state.Basket, state.categoryes.filter(p => p.id == action.pizzaId)]
+        }
+        break;
     default: return state
 
   }
@@ -103,6 +107,12 @@ export const productsActionCreator = {
     return {
       type: "SORT_PIZZA",
       sort:sort,
+    }
+  },
+  addBasket(pizzaId){
+    return {
+      type: "ADD-BASKET",
+      pizzaId:pizzaId,
     }
   },
 }

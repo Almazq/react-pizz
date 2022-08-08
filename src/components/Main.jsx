@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import './Main.css';
+import { NavLink } from "react-router-dom";
 const Main = (props)=>{
   const [categoryActive, setCategoryActive] = useState(0);
   const [trueTraditionally, setTrueTraditionally] = useState(false);
@@ -26,7 +27,7 @@ const Main = (props)=>{
             </div>
           </div>
           <div className="header__cart">
-            <a href="/cart.html" className="button button--cart">
+            <NavLink to="Basket" className="button button--cart">
               <span>520 ₽</span>
               <div className="button__delimiter"></div>
               <svg
@@ -58,8 +59,8 @@ const Main = (props)=>{
                   stroke-linejoin="round"
                 />
               </svg>
-              <span>3</span>
-            </a>
+              <span>{props.basketLength.length}</span>
+            </NavLink>
           </div>
         </div>
       </div>
@@ -136,7 +137,7 @@ const Main = (props)=>{
                     fill="white"
                   />
                 </svg>
-                <span>Добавить</span>
+                <span onClick={()=>props.clickBasket(product.id)}>Добавить</span>
                 <i>2</i>
               </div>
               </div>
