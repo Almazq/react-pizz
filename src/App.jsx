@@ -1,6 +1,6 @@
 import React from 'react'
 import MainConteiner from './components/Main-Conteiner';
-import Basket from './components/Basket';
+import BasketConteiner from './components/Basket-Conteiner';
 import {Route , Routes} from 'react-router-dom';
 
 const App = (props) => {
@@ -8,7 +8,7 @@ const App = (props) => {
     <div>
       <Routes>
         <Route path="/" element={<MainConteiner />}/>
-        <Route path='/Basket' element={<Basket />}/>
+        <Route path='/Basket' element={<BasketConteiner />}/>
       </Routes>
     </div>
   )

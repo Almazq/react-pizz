@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import ContentEmpty from './Basket-ContentEmpty'
+import ContentBasic from './Basket-ContentBasic'
 
 const Basket = (props) => {
   return (
@@ -52,7 +53,7 @@ const Basket = (props) => {
           </div>
         </div>
       </div>
-      <ContentEmpty />
+      {props.Basket < 1 ? <ContentEmpty /> : <ContentBasic Basket={props.Basket}/>}
     </div>
 
   )

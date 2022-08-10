@@ -29,9 +29,7 @@ const initalState = {
     {id: 4, title: "Острые"},
     {id: 5, title: "Закрытые"},
   ],
-  Basket: [
-    {id: 0, pizzaId: 5, pizzaIsTraditional: false, pizzaSize: 26},
-  ]
+  Basket: []
 };
 
 const ProductsReducer = (state = initalState , action) => {
@@ -76,7 +74,7 @@ const ProductsReducer = (state = initalState , action) => {
       break;
       case "ADD-BASKET":
         return {...state,
-          Basket: [...state.Basket, state.categoryes.filter(p => p.id == action.pizzaId)]
+          Basket: [...state.Basket, ...state.categoryes.filter(p => p.id == action.pizzaId)]
         }
         break;
     default: return state
