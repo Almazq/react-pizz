@@ -29,7 +29,8 @@ const initalState = {
     {id: 4, title: "Острые"},
     {id: 5, title: "Закрытые"},
   ],
-  Basket: []
+  Basket: [],
+  totalPrice: 0,
 };
 
 const ProductsReducer = (state = initalState , action) => {
@@ -77,6 +78,14 @@ const ProductsReducer = (state = initalState , action) => {
           Basket: [...state.Basket, ...state.categoryes.filter(p => p.id == action.pizzaId)]
         }
         break;
+      case "DELETE-BASKET":
+        return {...state,
+          Basket: [...state.Basket.filter(p => p.id !== action.pizzaId)]
+        }
+        break;
+      case "TOTAL-PRICE":
+        return {...state,totalPrice: state.Basket.map(p => p.price).reduce((partialSum, a) => partialSum + a, 0)}
+        break;
     default: return state
 
   }
@@ -111,6 +120,18 @@ export const productsActionCreator = {
     return {
       type: "ADD-BASKET",
       pizzaId:pizzaId,
+    }
+  },
+  deleteBasket(pizzaId){
+    return {
+      type: "DELETE-BASKET",
+      pizzaId:pizzaId,
+    }
+  },
+  totalPrice(price){
+    return {
+      type: "TOTAL-PRICE",
+      price:price,
     }
   },
 }

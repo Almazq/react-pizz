@@ -16,16 +16,17 @@ const App = (props) => {
   const sortPizzaFC = (sort)=>{
     props.sortPizza(sort)
   }
-  const clickBasket = (id, )=>{
+  const clickBasket = (id)=>{
     props.addBasket(id)
   }
-  console.log(props.products)
-  console.log(props.basket);
+  const totalPriceFC = (price)=>{
+    props.totalPrice(price)
+  }
   return (
     <div><Main products = {props.products} liClick ={liClick}
       changeSizeFC= {changeSizeFC}choicePizzaFC ={choicePizzaFC}
       categoryTitle={props.categoryTitle} sortPizzaFC={sortPizzaFC}
-      clickBasket={clickBasket} basketLength = {props.basket}/></div>
+      clickBasket={clickBasket} totalPriceFC={totalPriceFC} basket = {props.basket} totalPriceValue={props.totalPriceValue}/></div>
   )
 }
 
@@ -34,6 +35,7 @@ const mapStateToProps = (state)=>{
     products: state.Products.categoryes,
     categoryTitle: state.Products.categoryTitle,
     basket: state.Products.Basket,
+    totalPriceValue: state.Products.totalPrice,
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -52,6 +54,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     addBasket: (id)=>{
       dispatch(productsActionCreator.addBasket(id))
+    },
+    totalPrice: (price)=>{
+      dispatch(productsActionCreator.totalPrice(price))
     },
   }
 }
